@@ -12,27 +12,70 @@
     ></script>
   </head>
   <body>
-    <header class="bg-gray-100">
-      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto text-center">
-          <h2
-            class="text-base font-semibold text-indigo-600 tracking-wide uppercase"
+    <header class="bg-white dark:bg-slate-600">
+      <nav class="flex justify-between items-center w-10/12 mx-auto py-8">
+        <div class="flex gap-4 items-center">
+          <h1 class="text-xl">My Profile</h1>
+          <a
+            href="#"
+            class="p-4 duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
+            >Home</a
           >
-            Welcome to my website
-          </h2>
-          <p class="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
-            My name is Rico Muhammad
-          </p>
-          <p class="mt-4 text-lg text-gray-500">
-            I'm a web developer and a student. I'm currently studying at
-            <a
-              href="https://www.its.ac.id/"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
-              >Institut Teknologi Sepuluh Nopember</a
-            >.
-          </p>
+          <a
+            href="#"
+            class="p-4 duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
+            >About</a
+          >
+          <a
+            href="#"
+            class="p-4 duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
+            >Contact</a
+          >
         </div>
-      </div>
+        <div class="flex">
+          <button
+            id="dark"
+            class="relative flex justify-start duration-200 dark:justify-end items-center px-0.5 rounded-3xl w-16 h-9 bg-blue-500 dark:bg-gray-800 hover:bg-blue-600 hover:dark:bg-gray-900 hover:after:bg-slate-300 hover:dark:after:bg-gray-600 after:w-8 after:h-8 after:bg-slate-200 dark:after:bg-gray-500 after:rounded-2xl after:duration-200 after:flex after:justify-center after:items-center after:content-['🌞'] dark:after:content-['🌛']"
+          ></button>
+        </div>
+      </nav>
+      <section class="w-10/12 mx-auto mt-10">
+        <div class="flex items-center justify-between">
+          <div
+            class="flex flex-col before:h-1 before:w-36 before:bg-indigo-500 before:mb-4"
+          >
+            <h1 class="text-4xl font-bold">
+              Hello! My Name is
+              <span class="text-indigo-500">Rico Muhammad</span>
+            </h1>
+            <p class="text-xl">
+              I'm a <span id="description">Game & Web Developer</span
+              ><span id="typing">|</span>
+            </p>
+          </div>
+          <div>
+            <div class="p-2 bg-indigo-500 rounded-full">
+              <div class="p-2 bg-white rounded-full">
+                <div
+                  class="bg-gradient-to-r from-purple-400 to-yellow-400 w-72 h-w-72 relative rounded-full overflow-hidden flex justify-center items-end"
+                >
+                  <img
+                    src="./img/pp.png"
+                    alt="Profile Picture"
+                    class="w-10/12 relative"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </header>
+    <script src="./script.js"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+      };
+    </script>
   </body>
 </html>
