@@ -6,8 +6,7 @@ This is the repository for my personal portfolio website, which is a single page
 
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Alpine.js](https://github.com/alpinejs/alpine)
-
-The website is built entirely with client-side technologies, and no server-side code or imported scripts are used.
+- [Font Awesome](https://fontawesome.com/)
 
 ## Usage and Permissions
 
