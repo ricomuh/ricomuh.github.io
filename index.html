@@ -30,41 +30,65 @@
       <nav
         class="flex justify-between items-center w-10/12 mx-auto duration-200"
         x-bind:class="{ 'py-4': shadow, 'py-8': !shadow }"
+        x-data="{ open: false }"
       >
-        <div class="flex gap-4 items-center">
-          <h1 class="text-xl text-indigo-500 dark:text-white font-bold">
-            My Profile
-          </h1>
-          <template x-for="menu in menus" :key="menu.name">
-            <a
-              :href="menu.link"
-              class="p-4 duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
-              x-text="menu.name"
-            ></a>
-          </template>
-        </div>
-        <div class="flex">
-          <button
-            x-on:click="
-            dark = !dark;
-            localStorage.setItem('dark', dark);
-          "
+        <div class="flex gap-4 items-center w-full">
+          <div class="flex justify-between md:justify-start w-full md:w-auto">
+            <h1 class="text-xl text-indigo-500 dark:text-white font-bold">
+              My Profile
+            </h1>
+            <button
+              x-on:click="open = !open"
+              class="md:hidden flex flex-col justify-between px-2"
+            >
+              <i
+                class="text-xl text-gray-800 dark:text-white"
+                x-bind:class="{ 'fas fa-bars block': !open, 'fas fa-times': open }"
+              ></i>
+            </button>
+          </div>
+          <div
+            class="md:flex flex-col md:flex-row w-full md:w-auto left-0 justify-between flex-grow absolute top-full md:relative divide-y md:divide-y-0 bg-white dark:bg-gray-900 md:bg-transparent dark:md:bg-transparent shadow-md md:shadow-none"
+            x-bind:class="{ 'hidden': !open, 'flex': open }"
           >
-            <i
-              x-bind:class="
+            <div
+              class="flex flex-col md:flex-row items-center gap-4 divide-y md:divide-y-0"
+            >
+              <template x-for="menu in menus" :key="menu.name">
+                <a
+                  :href="menu.link"
+                  class="p-4 w-full text-center duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
+                  x-text="menu.name"
+                ></a>
+              </template>
+            </div>
+            <button
+              x-on:click="
+                dark = !dark;
+                localStorage.setItem('dark', dark);
+              "
+              class="p-4"
+            >
+              <i
+                x-bind:class="
               {
                 'far fa-moon block dark:hidden text-xl hover:scale-125 hover:-rotate-12 duration-200 text-gray-800': !dark,
                 'far fa-sun hidden dark:block text-xl hover:scale-125 hover:rotate-45 duration-200 text-yellow-600': dark
               }
               "
-            ></i>
-          </button>
+              ></i>
+            </button>
+          </div>
         </div>
       </nav>
     </header>
-    <section class="bg-white dark:bg-slate-800 min-h-screen flex items-center">
-      <section class="w-10/12 mx-auto mt-10">
-        <div class="flex items-center justify-between">
+    <section
+      class="bg-white dark:bg-slate-800 md:min-h-screen flex items-center"
+    >
+      <section class="md:w-10/12 mx-auto mt-32 md:mt-10 mb-10">
+        <div
+          class="flex flex-col-reverse md:flex-row gap-8 items-center justify-between"
+        >
           <div
             class="flex flex-col gap-4 before:h-1 before:w-36 before:bg-indigo-500 before:mb-4"
           >
@@ -182,23 +206,23 @@
           <h2 class="text-4xl font-bold text-indigo-900 dark:text-indigo-100">
             Skills
           </h2>
-          <div class="flex relative" x-data="{}">
+          <div class="flex relative w-full md:w-8/12 mx-auto">
             <template x-for="skill in skills">
               <button
-                class="w-48 text-lg duration-200"
+                class="w-1/3 text-lg duration-200"
                 x-bind:class="{'font-bold text-indigo-800 dark:text-indigo-400' : show == skill.type.toLowerCase(), 'text-indigo-500 font-semibold' : show != skill.type.toLowerCase()}"
                 x-on:click="show=skill.type.toLowerCase()"
                 x-text="skill.type"
               ></button>
             </template>
             <div
-              class="absolute w-48 h-1.5 bg-indigo-500 rounded-md -bottom-4 duration-200"
-              x-bind:class="{'translate-x-0': show == 'frontend', 'translate-x-48': show == 'backend', 'translate-x-96': show == 'game'}"
+              class="absolute w-1/3 h-1.5 bg-indigo-500 rounded-md -bottom-4 duration-200"
+              x-bind:class="{'translate-x-0': show == 'frontend', 'translate-x-full': show == 'backend', 'translate-x-[200%]' : show == 'game'}"
             ></div>
           </div>
           <template x-for="skill in skills">
             <div
-              class="grid grid-cols-4 gap-8 w-full"
+              class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-8 w-full"
               x-show="show == skill.type.toLowerCase()"
               x-transition:enter="transition duration-300"
               x-transition:enter-start="opacity-0 transform -translate-x-20"
