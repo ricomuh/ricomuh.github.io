@@ -147,23 +147,20 @@
               <div class="p-2 bg-white dark:bg-gray-800 rounded-full">
                 <div
                   class="bg-gradient-to-r from-purple-400 to-yellow-400 w-72 h-72 relative rounded-full overflow-hidden flex flex-col justify-end items-center"
-                  x-data="{img1: true}"
-                  x-init="setInterval(() => {img1 = !img1}, 4000)"
+                  x-data="{imgs: ['pp.png', 'pp2.png'], turn: 0}"
+                  x-init="setInterval(() => {
+                  turn++
+                  if (turn >= imgs.length) turn = 0;
+                  }, 3000)"
                 >
-                  <img
-                    src="./img/pp.png"
-                    alt="Profile Picture"
-                    x-bind:class="{'-bottom-full': img1, 'bottom-0': !img1}"
-                    class="w-10/12 absolute duration-300"
-                    id="img1"
-                  />
-                  <img
-                    src="./img/pp2.png"
-                    alt="Profile Picture"
-                    x-bind:class="{'-bottom-full': !img1, 'bottom-0': img1}"
-                    class="w-10/12 absolute duration-300"
-                    id="img2"
-                  />
+                  <template x-for="(img, index) in imgs" x-bind:key="index">
+                    <img
+                      x-bind:src="`/img/${img}`"
+                      alt="Profile Picture"
+                      x-bind:class="{'-bottom-full': turn != index, 'bottom-0': turn == index}"
+                      class="w-10/12 absolute duration-300"
+                    />
+                  </template>
                 </div>
               </div>
             </div>
