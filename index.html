@@ -10,59 +10,159 @@
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
+    <script
+      src="https://kit.fontawesome.com/dda3bee8fa.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body>
-    <header class="bg-white dark:bg-slate-600">
-      <nav class="flex justify-between items-center w-10/12 mx-auto py-8">
+  <body
+    x-data="{dark: false}"
+    x-init="dark = localStorage.getItem('dark') === 'true';"
+    x-bind:class="{ 'dark': dark }"
+  >
+    <header
+      x-data="{ shadow: false, menus: [{ name: 'Home', link: '#' }, { name: 'About', link: '#' }, { name: 'Contact', link: '#' }] }"
+      @scroll.window="shadow = window.scrollY > 0"
+      class="w-full backdrop-blur fixed z-10 top-0 duration-200"
+      x-bind:class="{ 'shadow-md bg-opacity-70 dark:bg-opacity-70 bg-white dark:bg-gray-700': shadow, 'shadow-none bg-opacity-0': !shadow }"
+    >
+      <nav
+        class="flex justify-between items-center w-10/12 mx-auto duration-200"
+        x-bind:class="{ 'py-4': shadow, 'py-8': !shadow }"
+      >
         <div class="flex gap-4 items-center">
-          <h1 class="text-xl">My Profile</h1>
-          <a
-            href="#"
-            class="p-4 duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
-            >Home</a
-          >
-          <a
-            href="#"
-            class="p-4 duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
-            >About</a
-          >
-          <a
-            href="#"
-            class="p-4 duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
-            >Contact</a
-          >
+          <h1 class="text-xl text-indigo-500 dark:text-white font-bold">
+            My Profile
+          </h1>
+          <template x-for="menu in menus" :key="menu.name">
+            <a
+              :href="menu.link"
+              class="p-4 duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
+              x-text="menu.name"
+            ></a>
+          </template>
         </div>
         <div class="flex">
           <button
-            id="dark"
-            class="relative flex justify-start duration-200 dark:justify-end items-center px-0.5 rounded-3xl w-16 h-9 bg-blue-500 dark:bg-gray-800 hover:bg-blue-600 hover:dark:bg-gray-900 hover:after:bg-slate-300 hover:dark:after:bg-gray-600 after:w-8 after:h-8 after:bg-slate-200 dark:after:bg-gray-500 after:rounded-2xl after:duration-200 after:flex after:justify-center after:items-center after:content-['🌞'] dark:after:content-['🌛']"
-          ></button>
+            x-on:click="
+            dark = !dark;
+            localStorage.setItem('dark', dark);
+          "
+          >
+            <i
+              x-bind:class="
+              {
+                'far fa-moon block dark:hidden text-xl hover:scale-125 hover:-rotate-12 duration-200 text-gray-800': !dark,
+                'far fa-sun hidden dark:block text-xl hover:scale-125 hover:rotate-45 duration-200 text-yellow-600': dark
+              }
+              "
+            ></i>
+          </button>
         </div>
       </nav>
+    </header>
+    <section class="bg-white dark:bg-slate-800 min-h-screen flex items-center">
       <section class="w-10/12 mx-auto mt-10">
         <div class="flex items-center justify-between">
           <div
-            class="flex flex-col before:h-1 before:w-36 before:bg-indigo-500 before:mb-4"
+            class="flex flex-col gap-4 before:h-1 before:w-36 before:bg-indigo-500 before:mb-4"
           >
-            <h1 class="text-4xl font-bold">
-              Hello! My Name is
-              <span class="text-indigo-500">Rico Muhammad</span>
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100">
+              Hello!<br />
+              I'm
+              <span
+                class="bg-gradient-to-r from-indigo-500 to bg-yellow-700 bg-clip-text text-transparent drop-shadow-lg"
+                >Rico Muhammad</span
+              >
             </h1>
-            <p class="text-xl">
-              I'm a <span id="description">Game & Web Developer</span
-              ><span id="typing">|</span>
+            <p
+              class="text-xl text-gray-800 dark:text-gray-200"
+              x-data="{
+              descs: [ 'Frontend Developer.', 'Backend Programmer.', 'College Student.', 'Game Developer.'], text: '', turn: 0, i: 0, wait: 0, waitMax: 30, pointerShow: true
+            }"
+              x-init="setInterval(() => {
+              if (i < descs[turn].length) {
+                pointerShow = true; text += descs[turn][i]; i++;
+              } else {
+                if (wait < waitMax) {
+                  if (wait % 6 == 0 && wait > 0) pointerShow = !pointerShow;
+                  wait++; return;
+                } else {
+                  wait = 0; text = ''; i = 0; turn++;
+                  if (turn >= descs.length) turn = 0;
+                }
+              }
+            }, 100)"
+            >
+              I'm a
+              <span
+                id="description"
+                class="text-indigo-800 dark:text-indigo-300 font-semibold"
+                x-text="text"
+                >Game & Web Developer</span
+              ><span x-bind:class="{'hidden' : !pointerShow}">|</span>
             </p>
+            <div class="flex gap-4">
+              <a
+                href="#"
+                class="px-6 py-3 font-bold text-lg duration-200 text-white bg-gradient-to-tr from-indigo-600 to-indigo-400 hover:from-indigo-700 hover:to-indigo-500 rounded-xl shadow-lg"
+                >Browse Portofolio</a
+              >
+              <a
+                href="#"
+                class="px-6 py-3 font-bold text-lg text-indigo-500 dark:text-white duration-200 hover:text-indigo-600 dark:hover:text-gray-100 rounded-xl shadow-md hover:shadow-lg"
+                >Contact Me</a
+              >
+            </div>
+            <div class="flex gap-4 mt-4">
+              <a
+                href="https://www.linkedin.com/in/rico-muhammad-012050195/"
+                target="_blank"
+                class="bg-gradient-to-t from-blue-700 to-blue-400 hover:to-blue-600 duration-200 w-12 h-12 rounded-2xl shadow-lg flex justify-center items-center"
+              >
+                <i class="fab fa-linkedin text-3xl text-gray-100"></i>
+              </a>
+              <a
+                href="https://www.instagram.com/ngoding_seru/"
+                target="_blank"
+                class="bg-gradient-to-tr from-purple-600 to-yellow-400 hover:from-purple-500 hover:to-yellow-500 duration-200 w-12 h-12 rounded-2xl shadow-lg flex justify-center items-center"
+              >
+                <i class="fab fa-instagram text-3xl text-white"></i>
+              </a>
+              <a
+                href="https://github.com/ricomuh"
+                target="_blank"
+                class="bg-gradient-to-t from-gray-200 via-white dark:from-black hover:bg-gray-100 dark:hover:bg-gray-700 duration-200 w-12 h-12 rounded-2xl shadow-lg flex justify-center items-center"
+              >
+                <i
+                  class="fab fa-github text-3xl text-gray-800 dark:text-gray-200"
+                ></i>
+              </a>
+            </div>
           </div>
           <div>
-            <div class="p-2 bg-indigo-500 rounded-full">
-              <div class="p-2 bg-white rounded-full">
+            <div
+              class="p-2 bg-gradient-to-tr from-indigo-600 to-purple-400 rounded-full shadow-xl"
+            >
+              <div class="p-2 bg-white dark:bg-gray-800 rounded-full">
                 <div
-                  class="bg-gradient-to-r from-purple-400 to-yellow-400 w-72 h-w-72 relative rounded-full overflow-hidden flex justify-center items-end"
+                  class="bg-gradient-to-r from-purple-400 to-yellow-400 w-72 h-72 relative rounded-full overflow-hidden flex flex-col justify-end items-center"
+                  x-data="{img1: true}"
+                  x-init="setInterval(() => {img1 = !img1}, 4000)"
                 >
                   <img
                     src="./img/pp.png"
                     alt="Profile Picture"
-                    class="w-10/12 relative"
+                    x-bind:class="{'-bottom-full': img1, 'bottom-0': !img1}"
+                    class="w-10/12 absolute duration-300"
+                    id="img1"
+                  />
+                  <img
+                    src="./img/pp2.png"
+                    alt="Profile Picture"
+                    x-bind:class="{'-bottom-full': !img1, 'bottom-0': img1}"
+                    class="w-10/12 absolute duration-300"
+                    id="img2"
                   />
                 </div>
               </div>
@@ -70,8 +170,63 @@
           </div>
         </div>
       </section>
-    </header>
-    <script src="./script.js"></script>
+    </section>
+    <main>
+      <section class="min-h-screen bg-indigo-50 relative">
+        <div
+          class="absolute top-0 w-full h-24 bg-gradient-to-t from-indigo-50 to-white"
+        ></div>
+        <div
+          class="w-10/12 mx-auto pt-24 relative flex flex-col gap-10 items-center"
+          x-data="{show: 'frontend', skills: [{type: 'Frontend',items: [{name: 'HTML', img: 'html.webp'},{name: 'CSS', img: 'css.webp'},{name: 'JavaScript', img: 'js.jpg'},{name: 'Bootstrap', img: 'bootstrap.png'},{name: 'jQuery', img: 'jquery.png'},{name: 'Tailwind', img: 'tailwind.png'},{name: 'next.js', img: 'next.png'},]},{type: 'Backend',items: [{name: 'PHP', img: 'php.png'},{name: 'Laravel', img: 'laravel.png'},{name: 'CodeIgniter', img: 'ci.png'},{name: 'MySQL', img: 'mysql.png'},{name: 'MongoDB', img: 'mongo.png'},{name: 'Node.js', img: 'node.png'},{name: 'Express.js', img: 'express.png'},]},{type: 'Game',items: [{name: 'Unity', img: 'unity.png'},{name: 'C#', img: 'csharp.png'},{name: 'GameMaker', img: 'gm.png'},{name: 'Construct', img: 'construct.png'},]}]}"
+          x-init="setInterval(() => {switch(show) {case 'frontend': show = 'backend'; break; case 'backend': show = 'game'; break; default: show = 'frontend'; break;}}, 80000)"
+        >
+          <h2 class="text-4xl font-bold">Skills</h2>
+          <div class="flex relative" x-data="{}">
+            <template x-for="skill in skills">
+              <button
+                class="w-48 text-lg duration-200"
+                x-bind:class="{'font-bold text-indigo-800' : show == skill.type.toLowerCase(), 'text-indigo-500 font-semibold' : show != skill.type.toLowerCase()}"
+                x-on:click="show=skill.type.toLowerCase()"
+                x-text="skill.type"
+              ></button>
+            </template>
+            <div
+              class="absolute w-48 h-1.5 bg-indigo-500 rounded-md -bottom-4 duration-200"
+              x-bind:class="{'translate-x-0': show == 'frontend', 'translate-x-48': show == 'backend', 'translate-x-96': show == 'game'}"
+            ></div>
+          </div>
+          <template x-for="skill in skills">
+            <div
+              class="grid grid-cols-4 gap-8 w-full"
+              x-show="show == skill.type.toLowerCase()"
+              x-transition:enter="transition duration-300"
+              x-transition:enter-start="opacity-0 transform -translate-x-20"
+              x-transition:enter-end="opacity-100 transform translate-x-0"
+              x-transition:leave="transition duration-300"
+              x-transition:leave-start="opacity-100 transform translate-x-0"
+              x-transition:leave-end="opacity-0 transform -translate-x-20"
+            >
+              <template x-for="item in skill.items">
+                <div
+                  class="flex flex-col items-center justify-center gap-4 bg-indigo-200 hover:bg-indigo-300 duration-200 hoverable relative rounded-3xl shadow-lg border-8 border-indigo-50 aspect-square"
+                >
+                  <img
+                    x-bind:src="'/img/skills/' + item.img"
+                    x-bind:alt="item.name"
+                    class="h-24 drop-shadow-md"
+                  />
+                  <h3 class="text-lg font-semibold" x-text="item.name"></h3>
+                </div>
+              </template>
+            </div>
+          </template>
+        </div>
+      </section>
+    </main>
+    <footer class="flex justify-center items-center h-16">
+      Created with ❤️ by Rico Muhammad
+    </footer>
     <script>
       tailwind.config = {
         darkMode: "class",
