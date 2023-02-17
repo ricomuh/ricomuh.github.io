@@ -108,9 +108,12 @@
             <div class="flex gap-4">
               <a
                 href="#"
-                class="px-6 py-3 font-bold text-lg duration-200 text-white bg-gradient-to-tr from-indigo-600 to-indigo-400 hover:from-indigo-700 hover:to-indigo-500 rounded-xl shadow-lg"
-                >Browse Portofolio</a
-              >
+                class="px-6 py-3 font-bold text-lg duration-200 text-white bg-gradient-to-tr from-indigo-600 to-indigo-400 hover:from-indigo-700 hover:to-indigo-500 rounded-xl shadow-lg flex gap-2 items-center group"
+                ><span>Browse Portofolio</span
+                ><i
+                  class="fas fa-chevron-right group-hover:rotate-90 duration-200"
+                ></i
+              ></a>
               <a
                 href="#"
                 class="px-6 py-3 font-bold text-lg text-indigo-500 dark:text-white duration-200 hover:text-indigo-600 dark:hover:text-gray-100 rounded-xl shadow-md hover:shadow-lg"
@@ -122,7 +125,7 @@
                 <a
                   :href="social.link"
                   target="_blank"
-                  class="duration-200 w-12 h-12 rounded-2xl shadow-lg flex justify-center items-center"
+                  class="duration-200 w-12 h-12 rounded-2xl shadow-lg flex justify-center items-center hover:-translate-y-2"
                   :class="social.class"
                 >
                   <i :class="social.icon + ' text-3xl ' + social.color"></i>
@@ -169,7 +172,7 @@
           <div class="flex relative w-full md:w-8/12 mx-auto">
             <template x-for="skill in skills">
               <button
-                class="w-1/3 text-lg duration-200"
+                class="w-1/3 text-base duration-200"
                 :class="show == skill.type.toLowerCase() ? 'font-bold text-indigo-800 dark:text-indigo-400' : 'text-indigo-500 font-semibold'"
                 @click="show=skill.type.toLowerCase()"
                 x-text="skill.type"
@@ -177,7 +180,7 @@
             </template>
             <div
               class="absolute w-1/3 h-1.5 bg-indigo-500 rounded-md -bottom-4 duration-200"
-              :class="{'translate-x-0': show == 'frontend', 'translate-x-full': show == 'backend', 'translate-x-[200%]' : show == 'game'}"
+              :class="{'translate-x-0': show == 'frontend', 'translate-x-full': show == 'backend', 'translate-x-[200%]' : show == 'game dev'}"
             ></div>
           </div>
           <template x-for="skill in skills">
@@ -193,16 +196,22 @@
             >
               <template x-for="item in skill.items">
                 <div
-                  class="flex flex-col items-center justify-center gap-4 bg-indigo-200 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-indigo-300 duration-200 hoverable relative rounded-3xl shadow-lg border-8 border-indigo-50 dark:border-gray-800 aspect-square"
+                  class="card flex flex-col items-center justify-center gap-4 bg-indigo-200 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-indigo-300 duration-200 hoverable relative rounded-3xl shadow-lg border-8 border-indigo-50 dark:border-gray-800 aspect-square"
+                  style="
+                    transform-style: preserve-3d;
+                    transform: perspective(1000px);
+                  "
                 >
                   <img
                     :src="'/img/skills/' + item.img"
                     :alt="item.name"
-                    class="h-24 drop-shadow-md"
+                    class="h-16 md:h-24 drop-shadow-md"
+                    style="transform: translateZ(20px)"
                   />
                   <h3
                     class="text-lg font-semibold text-gray-900 dark:text-gray-100"
                     x-text="item.name"
+                    style="transform: translateZ(40px)"
                   ></h3>
                 </div>
               </template>
@@ -210,17 +219,43 @@
           </template>
         </div>
       </section>
+      <section class="min-h-screen">
+        <div
+          class="w-48 h-24 bg-blue-500 flex justify-center items-center"
+          data-tilt
+        >
+          <span style="transform: translateZ(10px)">Hallo!</span>
+        </div>
+      </section>
     </main>
     <footer
       class="flex justify-center items-center text-indigo-900 dark:text-indigo-100 bg-white dark:bg-gray-800"
     >
-      <span class="mt-20 mb-10">Created with ❤️ by Rico Muhammad</span>
+      <span class="mt-20 mb-10"
+        >Created with
+        <i class="fas fa-heart text-red-600 animate-floating"></i> by Rico
+        Muhammad</span
+      >
     </footer>
     <script>
       tailwind.config = {
         darkMode: "class",
+        theme: {
+          extend: {
+            animation: {
+              floating: "floating 1.5s ease-in-out infinite",
+            },
+            keyframes: {
+              floating: {
+                "0%, 100%": { transform: "translateY(1.5px)" },
+                "50%": { transform: "translateY(-1.5px)" },
+              },
+            },
+          },
+        },
       };
     </script>
+    <script type="text/javascript" src="./vanilla-tilt.js"></script>
     <script>
       const images = () => ({
         init() {
@@ -304,7 +339,7 @@
                 this.show = "backend";
                 break;
               case "backend":
-                this.show = "game";
+                this.show = "game dev";
                 break;
               default:
                 this.show = "frontend";
@@ -338,7 +373,7 @@
             ],
           },
           {
-            type: "Game",
+            type: "Game Dev",
             items: [
               { name: "Unity", img: "unity.png" },
               { name: "C#", img: "csharp.png" },
@@ -348,6 +383,19 @@
           },
         ],
         show: "frontend",
+      });
+      document.addEventListener("alpine:init", () => {
+        setTimeout(() => {
+          VanillaTilt.init(document.querySelectorAll(".card"), {
+            max: 25,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.5,
+            reverse: true,
+            scale: 1.1,
+            glare: true,
+          });
+        }, 100);
       });
     </script>
   </body>
