@@ -7,6 +7,7 @@ This is the repository for my personal portfolio website, which is a single page
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Alpine.js](https://github.com/alpinejs/alpine)
 - [Font Awesome](https://fontawesome.com/)
+- [Vanilla-tilt.js](https://micku7zu.github.io/vanilla-tilt.js/)
 
 ## Usage and Permissions
 
