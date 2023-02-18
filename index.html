@@ -73,98 +73,98 @@
         </div>
       </nav>
     </header>
-    <section
-      class="bg-white dark:bg-slate-800 md:min-h-screen flex items-center"
-    >
-      <section class="md:w-10/12 mx-auto mt-32 md:mt-10 mb-10">
-        <div
-          class="flex flex-col-reverse md:flex-row gap-8 items-center justify-between"
-        >
+    <main>
+      <section
+        class="bg-white dark:bg-slate-800 md:min-h-screen flex items-center"
+      >
+        <section class="md:w-10/12 mx-auto mt-32 md:mt-10 mb-10">
           <div
-            class="flex flex-col gap-4 before:h-1 before:w-36 before:bg-indigo-500 before:mb-4"
+            class="flex flex-col-reverse md:flex-row gap-8 items-center justify-between"
           >
-            <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100">
-              Hello!<br />
-              I'm
-              <span
-                class="bg-gradient-to-r from-indigo-500 to bg-yellow-700 bg-clip-text text-transparent drop-shadow-lg"
-                >Rico Muhammad</span
-              >
-            </h1>
-            <p
-              class="text-xl text-gray-800 dark:text-gray-200"
-              x-data="typing()"
-            >
-              I'm a
-              <span
-                class="text-indigo-800 dark:text-indigo-300 font-semibold"
-                x-text="text"
-                >Game & Web Developer</span
-              ><span
-                class="duration-100"
-                :class="pointerShow? 'opacity-100' : 'opacity-0'"
-                >|</span
-              >
-            </p>
-            <div class="flex gap-4">
-              <a
-                href="#portofolio"
-                class="px-6 py-3 font-bold text-lg duration-200 text-white bg-gradient-to-tr from-indigo-600 to-indigo-400 hover:from-indigo-700 hover:to-indigo-500 rounded-xl shadow-lg flex gap-2 items-center group"
-                ><span>Browse Portofolio</span
-                ><i
-                  class="fas fa-chevron-right group-hover:rotate-90 duration-200"
-                ></i
-              ></a>
-              <a
-                href="#"
-                class="px-6 py-3 font-bold text-lg text-indigo-500 dark:text-white duration-200 hover:text-indigo-600 dark:hover:text-gray-100 rounded-xl shadow-md hover:shadow-lg"
-                >Contact Me</a
-              >
-            </div>
-            <div class="flex gap-4 mt-4" x-data="socials()">
-              <template x-for="social in socials" :key="social.name">
-                <a
-                  :href="social.link"
-                  target="_blank"
-                  class="duration-200 w-12 h-12 rounded-2xl shadow-lg flex justify-center items-center hover:-translate-y-2"
-                  :class="social.class"
-                >
-                  <i :class="social.icon + ' text-3xl ' + social.color"></i>
-                </a>
-              </template>
-            </div>
-          </div>
-          <div>
             <div
-              data-tilt
-              style="
-                transform-style: preserve-3d;
-                transform: perspective(1000px);
-              "
-              class="p-2 bg-gradient-to-tr from-indigo-600 to-purple-400 rounded-full shadow-xl"
+              class="flex flex-col gap-4 before:h-1 before:w-36 before:bg-indigo-500 before:mb-4"
             >
-              <div class="p-2 bg-white dark:bg-gray-800 rounded-full">
-                <div
-                  class="bg-gradient-to-r from-purple-400 to-yellow-400 w-72 h-72 relative rounded-full overflow-hidden flex flex-col justify-end items-center"
-                  x-data="images()"
+              <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100">
+                Hello!<br />
+                I'm
+                <span
+                  class="bg-gradient-to-r from-indigo-500 to bg-yellow-700 bg-clip-text text-transparent drop-shadow-lg"
+                  >Rico Muhammad</span
                 >
-                  <template x-for="(img, index) in imgs" :key="index">
-                    <img
-                      :src="`/img/${img}`"
-                      alt="Profile Picture"
-                      style="transform: translateZ(70px)"
-                      :class="turn == index? 'bottom-0' : '-bottom-full'"
-                      class="w-10/12 absolute duration-300"
-                    />
-                  </template>
+              </h1>
+              <p
+                class="text-xl text-gray-800 dark:text-gray-200"
+                x-data="typing()"
+              >
+                I'm a
+                <span
+                  class="text-indigo-800 dark:text-indigo-300 font-semibold"
+                  x-text="text"
+                  >Game & Web Developer</span
+                ><span
+                  class="duration-100"
+                  :class="pointerShow? 'opacity-100' : 'opacity-0'"
+                  >|</span
+                >
+              </p>
+              <div class="flex gap-4">
+                <a
+                  href="#portofolio"
+                  class="px-6 py-3 font-bold text-lg duration-200 text-white bg-gradient-to-tr from-indigo-600 to-indigo-400 hover:from-indigo-700 hover:to-indigo-500 rounded-xl shadow-lg flex gap-2 items-center group"
+                  ><span>Browse Portofolio</span
+                  ><i
+                    class="fas fa-chevron-right group-hover:rotate-90 duration-200"
+                  ></i
+                ></a>
+                <a
+                  href="#contact"
+                  class="px-6 py-3 font-bold text-lg text-indigo-500 dark:text-white duration-200 hover:text-indigo-600 dark:hover:text-gray-100 rounded-xl shadow-md hover:shadow-lg"
+                  >Contact Me</a
+                >
+              </div>
+              <div class="flex gap-4 mt-4" x-data="socials()">
+                <template x-for="social in socials" :key="social.name">
+                  <a
+                    :href="social.link"
+                    target="_blank"
+                    class="duration-200 w-12 h-12 rounded-2xl shadow-lg flex justify-center items-center hover:-translate-y-2"
+                    :class="social.class"
+                  >
+                    <i :class="social.icon + ' text-3xl ' + social.color"></i>
+                  </a>
+                </template>
+              </div>
+            </div>
+            <div>
+              <div
+                data-tilt
+                style="
+                  transform-style: preserve-3d;
+                  transform: perspective(1000px);
+                "
+                class="p-2 bg-gradient-to-tr from-indigo-600 to-purple-400 rounded-full shadow-xl"
+              >
+                <div class="p-2 bg-white dark:bg-gray-800 rounded-full">
+                  <div
+                    class="bg-gradient-to-r from-purple-400 to-yellow-400 w-72 h-72 relative rounded-full overflow-hidden flex flex-col justify-end items-center"
+                    x-data="images()"
+                  >
+                    <template x-for="(img, index) in imgs" :key="index">
+                      <img
+                        :src="`/img/${img}`"
+                        alt="Profile Picture"
+                        style="transform: translateZ(70px)"
+                        :class="turn == index? 'bottom-0' : '-bottom-full'"
+                        class="w-10/12 absolute duration-300"
+                      />
+                    </template>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
-    </section>
-    <main>
       <section class="bg-indigo-50 dark:bg-gray-800 relative pb-20">
         <div
           class="absolute top-0 w-full h-24 bg-gradient-to-t from-indigo-50 to-white dark:hidden"
@@ -293,7 +293,7 @@
                 <template x-for="contact in contacts">
                   <a
                     :href="contact.link"
-                    class="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:scale-110 duration-200"
+                    class="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:scale-110 hover:-translate-y-2 duration-200"
                     :class="contact.color"
                   >
                     <i :class="contact.icon" class="text-2xl"></i>
@@ -321,26 +321,47 @@
                   );
                 "
               >
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your name"
-                  class="outline-none border-2 border-gray-300 focus:border-indigo-900 rounded-md px-4 py-2 duration-200 ring-2 ring-transparent focus:ring-indigo-500 focus:rind-opacity-50 hover:border-indigo-900 dark:hover:border-indigo-100"
-                  x-model="name"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your email"
-                  class="outline-none border-2 border-gray-300 focus:border-indigo-900 rounded-md px-4 py-2 duration-200 ring-2 ring-transparent focus:ring-indigo-500 focus:rind-opacity-50 hover:border-indigo-900 dark:hover:border-indigo-100"
-                  x-model="email"
-                />
-                <textarea
-                  name="message"
-                  placeholder="Your message"
-                  class="outline-none border-2 border-gray-300 focus:border-indigo-900 rounded-md px-4 py-2 duration-200 ring-2 ring-transparent focus:ring-indigo-500 focus:rind-opacity-50 hover:border-indigo-900 dark:hover:border-indigo-100"
-                  x-model="message"
-                ></textarea>
+                <div class="relative z-0">
+                  <input
+                    type="text"
+                    id="form_name"
+                    name="name"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
+                    placeholder=" "
+                  />
+                  <label
+                    for="form_name"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                    >Your name</label
+                  >
+                </div>
+                <div class="relative z-0">
+                  <input
+                    type="email"
+                    id="form_email"
+                    name="email"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
+                    placeholder=" "
+                  />
+                  <label
+                    for="form_email"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                    >Your email</label
+                  >
+                </div>
+                <div class="relative z-0">
+                  <textarea
+                    id="form_message"
+                    name="message"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-indigo-500 focus:outline-none focus:ring-0 focus:border-indigo-600 peer"
+                    placeholder=" "
+                  ></textarea>
+                  <label
+                    for="form_message"
+                    class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-600 peer-focus:dark:text-indigo-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                    >Message</label
+                  >
+                </div>
                 <button
                   type="submit"
                   class="text-white rounded-md px-4 py-4 duration-200"
