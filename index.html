@@ -23,7 +23,7 @@
     :class="dark && 'dark'"
   >
     <header
-      x-data="{ shadow: false, menus: [{ name: 'Home', link: '#' }, { name: 'Skills', link: '#skills' }, { name: 'Portofolio', link: '#portofolio' }, { name: 'Contact', link: '#' }] }"
+      x-data="{ shadow: false, menus: [{ name: 'Home', link: '#' }, { name: 'Skills', link: '#skills' }, { name: 'Portofolio', link: '#portofolio' }, { name: 'Contact', link: '#contact' }] }"
       @scroll.window="shadow = window.scrollY > 0"
       class="w-full backdrop-blur fixed z-10 top-0 duration-200"
       :class="shadow ? 'shadow-md bg-opacity-70 dark:bg-opacity-70 bg-white dark:bg-gray-700' : 'shadow-none bg-opacity-0'"
@@ -58,6 +58,7 @@
               <template x-for="menu in menus" :key="menu.name">
                 <a
                   :href="menu.link"
+                  @click="open = false"
                   class="p-4 w-full text-center duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
                   x-text="menu.name"
                 ></a>
@@ -237,7 +238,7 @@
           <div class="grid grid-cols-1 md:grid-cols-4 gap-5 w-full">
             <template x-for="(project, index) in projects">
               <div
-                class="project shadow-lg relative rounded-3xl overflow-hidden group cursor-zoom-in"
+                class="project shadow-lg relative rounded-3xl overflow-hidden group aspect-square md:aspect-auto"
                 :class="project.landscape ? 'md:col-span-2' : 'md:col-span-1 md:row-span-2'"
                 style="
                   transform-style: preserve-3d;
@@ -277,43 +278,79 @@
           <h2 class="text-4xl font-bold text-indigo-900 dark:text-indigo-100">
             Contact
           </h2>
-          <div class="flex flex-col gap-5 w-full md:w-8/12">
-            <template x-for="item in contact">
-              <div
-                class="flex flex-col gap-2 items-center md:flex-row md:items-start"
+          <div class="flex flex-col md:flex-row gap-8 w-full">
+            <div class="flex flex-col gap-5 w-full md:w-1/3">
+              <h3
+                class="text-2xl font-bold text-indigo-900 dark:text-indigo-100"
               >
-                <div
-                  class="flex items-center justify-center w-12 h-12 rounded-full bg-indigo-200 dark:bg-gray-700"
-                >
-                  <i :class="item.icon" class="text-2xl text-indigo-900"></i>
-                </div>
-                <div class="flex flex-col gap-2">
-                  <h3
-                    class="text-lg font-semibold text-indigo-900 dark:text-indigo-100"
+                Get in touch
+              </h3>
+              <p class="text-gray-700 dark:text-gray-300">
+                If you have any questions or want to work with me, feel free to
+                contact me.
+              </p>
+              <div class="flex gap-3">
+                <template x-for="contact in contacts">
+                  <a
+                    :href="contact.link"
+                    class="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:scale-110 duration-200"
+                    :class="contact.color"
                   >
-                    <span x-text="item.name"></span>
-                    <span x-if="item.name == 'Email'">
-                      <a
-                        :href="'mailto:' + item.value"
-                        class="hover:underline"
-                        x-text="item.value"
-                      ></a>
-                    </span>
-                    <span x-if="item.name != 'Email'">
-                      <a
-                        :href="item.value"
-                        class="hover:underline"
-                        x-text="item.value"
-                      ></a>
-                    </span>
-                  </h3>
-                  <p
-                    class="text-gray-500 dark:text-gray-400"
-                    x-text="item.desc"
-                  ></p>
-                </div>
+                    <i :class="contact.icon" class="text-2xl"></i>
+                  </a>
+                </template>
               </div>
-            </template>
+            </div>
+            <div
+              class="flex flex-col gap-5 w-full md:w-2/3"
+              x-data="{name: '', email: '', message: '', text: ''}"
+            >
+              <h3
+                class="text-2xl font-bold text-indigo-900 dark:text-indigo-100"
+              >
+                Send me a message
+              </h3>
+              <form
+                class="flex flex-col gap-5"
+                @submit.prevent="
+                  text = `Hello! My name is ${name}, I'm from ${email}. I want to ask about ${message}`;
+                  phone = 6282138947820;
+                  window.open(
+                    `https://api.whatsapp.com/send?phone=${phone}&text=${text}`,
+                    '_blank'
+                  );
+                "
+              >
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your name"
+                  class="outline-none border-2 border-gray-300 focus:border-indigo-900 rounded-md px-4 py-2 duration-200 ring-2 ring-transparent focus:ring-indigo-500 focus:rind-opacity-50 hover:border-indigo-900 dark:hover:border-indigo-100"
+                  x-model="name"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your email"
+                  class="outline-none border-2 border-gray-300 focus:border-indigo-900 rounded-md px-4 py-2 duration-200 ring-2 ring-transparent focus:ring-indigo-500 focus:rind-opacity-50 hover:border-indigo-900 dark:hover:border-indigo-100"
+                  x-model="email"
+                />
+                <textarea
+                  name="message"
+                  placeholder="Your message"
+                  class="outline-none border-2 border-gray-300 focus:border-indigo-900 rounded-md px-4 py-2 duration-200 ring-2 ring-transparent focus:ring-indigo-500 focus:rind-opacity-50 hover:border-indigo-900 dark:hover:border-indigo-100"
+                  x-model="message"
+                ></textarea>
+                <button
+                  type="submit"
+                  class="text-white rounded-md px-4 py-4 duration-200"
+                  :class="(name && email && message) ? 'bg-green-700 hover:bg-green-800' : 'bg-gray-300 cursor-not-allowed dark:bg-gray-700'"
+                  :disabled="!name || !email || !message"
+                >
+                  Send to WhatsApp
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>

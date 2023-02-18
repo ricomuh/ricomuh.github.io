@@ -93,7 +93,7 @@ const skills = () => ({
           this.show = "frontend";
           break;
       }
-    }, 80000);
+    }, 10000);
   },
   skills: [
     {
@@ -223,26 +223,36 @@ const projects = () => ({
   ],
 });
 const contact = () => ({
-  contact: [
+  contacts: [
     {
       name: "Email",
-      icon: "mail",
+      icon: "fas fa-envelope",
+      color: "hover:text-red-500 dark:hover:text-red-400",
       link: "mailto:rico@leolitgames.com",
     },
     {
       name: "Instagram",
-      icon: "instagram",
+      icon: "fab fa-instagram",
+      color: "hover:text-pink-500 dark:hover:text-pink-400",
       link: "https://instagram.com/ricochething.exe",
     },
     {
       name: "Github",
-      icon: "github",
+      icon: "fab fa-github",
+      color: "hover:text-black dark:hover:text-white",
       link: "https://github.com/ricomuh",
     },
     {
       name: "Linkedin",
-      icon: "linkedin",
+      icon: "fab fa-linkedin-in",
+      color: "hover:text-blue-500 dark:hover:text-blue-400",
       link: "https://www.linkedin.com/in/rico-muhammad-012050195/",
+    },
+    {
+      name: "Whatsapp",
+      icon: "fab fa-whatsapp",
+      color: "hover:text-green-500 dark:hover:text-green-400",
+      link: "https://wa.me/6282138947820",
     },
   ],
 });
