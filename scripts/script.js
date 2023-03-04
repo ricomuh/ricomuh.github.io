@@ -51,7 +51,7 @@ const socials = () => ({
       icon: "fab fa-linkedin",
       class:
         "bg-gradient-to-t from-blue-700 to-blue-400 hover:to-blue-600 duration-200 w-12 h-12 rounded-2xl shadow-lg flex justify-center items-center",
-      link: "https://www.linkedin.com/in/rico-muhammad-012050195/",
+      link: "https://www.linkedin.com/in/ricomuh/",
       color: "text-gray-100",
     },
     {
@@ -234,7 +234,7 @@ const contact = () => ({
       name: "Instagram",
       icon: "fab fa-instagram",
       color: "hover:text-pink-500 dark:hover:text-pink-400",
-      link: "https://instagram.com/ricochething.exe",
+      link: "https://instagram.com/ricomuh_",
     },
     {
       name: "Github",
@@ -246,13 +246,19 @@ const contact = () => ({
       name: "Linkedin",
       icon: "fab fa-linkedin-in",
       color: "hover:text-blue-500 dark:hover:text-blue-400",
-      link: "https://www.linkedin.com/in/rico-muhammad-012050195/",
+      link: "https://www.linkedin.com/in/ricomuh",
     },
     {
       name: "Whatsapp",
       icon: "fab fa-whatsapp",
       color: "hover:text-green-500 dark:hover:text-green-400",
       link: "https://wa.me/6282138947820",
+    },
+    {
+      name: "Twitter",
+      icon: "fab fa-twitter",
+      color: "hover:text-blue-400 dark:hover:text-blue-300",
+      link: "https://twitter.com/ricomuh_",
     },
   ],
 });
