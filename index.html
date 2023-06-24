@@ -24,6 +24,23 @@
       content="Rico Muhammad, Rico, Muhammad, Rico Muhammad Portfolio, Rico Muhammad Portofolio, Rico Muhammad Nashrullah, Leolit Games"
     />
     <meta name="author" content="Rico Muhammad Nashrullah" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        font-family: "Montserrat", sans-serif;
+      }
+    </style>
   </head>
   <body
     x-data="{ dark: false }"
@@ -73,7 +90,7 @@
                 <a
                   :href="menu.link"
                   @click="open = false"
-                  class="p-4 w-full text-center duration-200 text-indigo-700 hover:text-indigo-500 dark:text-indigo-100 hover:dark:text-indigo-300"
+                  class="p-4 w-full text-center duration-200 text-indigo-700 hover:text-indigo-500 relative dark:text-indigo-100 hover:dark:text-indigo-300 after:block after:h-1 after:w-full hover:scale-110 after:absolute after:bg-yellow-300 after:-translate-x-2 after:scale-x-0 hover:after:scale-x-100 after:duration-200 after:origin-left"
                   x-text="menu.name"
                 ></a>
               </template>
@@ -99,7 +116,8 @@
               class="flex flex-col gap-4 before:h-1 before:w-36 before:bg-indigo-500 before:mb-4"
             >
               <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100">
-                Hello!<br />
+                Hello<span class="text-red-500 text-5xl rotate-45">!</span>
+                <br />
                 I'm
                 <span
                   class="bg-gradient-to-r from-indigo-500 to bg-yellow-700 bg-clip-text text-transparent drop-shadow-lg"
@@ -201,7 +219,7 @@
               ></button>
             </template>
             <div
-              class="absolute w-1/3 h-1.5 bg-indigo-500 rounded-md -bottom-4 duration-200"
+              class="absolute w-1/3 h-1.5 bg-indigo-500 -bottom-4 duration-200"
               :class="{'translate-x-0': show == 'frontend', 'translate-x-full': show == 'backend', 'translate-x-[200%]' : show == 'game dev'}"
             ></div>
           </div>
@@ -216,24 +234,24 @@
               x-transition:leave-start="opacity-100 transform translate-x-0"
               x-transition:leave-end="opacity-0 transform translate-x-20"
             >
-              <template x-for="item in skill.items">
+              <!-- <template x-for="item in skill.items"> -->
+              <!-- for loop with the id -->
+              <template x-for="(item, index) in skill.items" :key="index">
                 <div
-                  class="card flex flex-col items-center justify-center gap-4 bg-indigo-200 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-indigo-300 duration-200 hoverable relative rounded-3xl shadow-lg border-8 border-indigo-50 dark:border-gray-800 aspect-square"
-                  style="
-                    transform-style: preserve-3d;
-                    transform: perspective(1000px);
-                  "
+                  class="flex flex-col items-center justify-center gap-4 bg-purple-200 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-purple-300 duration-200 hoverable relative shadow-lg hover:shadow-xl border-8 border-indigo-50 dark:border-gray-800 aspect-square hover:scale-110 overflow-hidden group cursor-pointer"
+                  :class="index%2 == 0 ? 'hover:rotate-3' : 'hover:-rotate-3'"
                 >
+                  <div
+                    class="absolute w-1/2 -right-5 top-0 h-[150%] -translate-x-8 -translate-y-32 -rotate-[60deg] bg-gradient-to-r from-white opacity-20 group-hover:opacity-75 duration-200 group-hover:-translate-y-28 z-10"
+                  ></div>
                   <img
                     :src="'/img/skills/' + item.img"
                     :alt="item.name"
                     class="h-16 md:h-24 drop-shadow-md"
-                    style="transform: translateZ(20px)"
                   />
                   <h3
                     class="text-lg font-semibold text-gray-900 dark:text-gray-100"
                     x-text="item.name"
-                    style="transform: translateZ(40px)"
                   ></h3>
                 </div>
               </template>
